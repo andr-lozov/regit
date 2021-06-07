@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="style.css">
+
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Таблица</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <header>
+        <h1>Выполнение тествого задания по демонстрации 10-ти постов <br> из библиотеки JOSON.PlaceHolder.typicode.com</h1>
+    </header>
+    <nav>
+        
+        <button1 class="button" onclick="myFunction()">Жмите для прокрутки</button1>
+        <div class='box' margin=o auto>
+            <input class="in" name="tx" type="text" margin=o auto>
+        </div>
+        <button2 class="button" onclick="youFunction()">Писк постов по заголовкам</button2>
+    </nav>
+
+
+    <table id="tab">
+        <tbody class="tb" id="tablebody">
+            <tr id="tr" >
+                <td>{element.userId}</td>
+                <td>{element.id}</td>
+                <td>{element.title}</td>
+                <td>{element.body}</td>
+            </tr>
+        </tbody>
+    </table>
+    
+
+    <script>
+        fetch('https://jsonplaceholder.typicode.com/posts')
+            .then((response) => response.json())
+            .then((json) => json.forEach(tableElements))
+
+        function tableElements(element, index, arr) {
+            if (element.id < 11) {
+
+
+                arr[index] = document.querySelector('table').innerHTML +=
+                    `<tr id="somerow" >
+        <td>${element.userId}</td>
+        <td>${element.id}</td>
+        <td id="somecel">${element.title}</td>
+        <td>${element.body}</td>
+         </tr>`
+            }
+        }
+
+
+        
+        
+         let i = 9;
+         let n = 11;
+               
+        function myFunction() {
+                if (n > 91) {
+                    alert("Посты закончились, перезагрузите страницу!")
+                }
+           
+                document.getElementsByTagName("tr")[1].remove();
+                
+                      
+        
+            fetch('https://jsonplaceholder.typicode.com/posts')
+                .then((response) => response.json())
+                .then((json) => json.forEach(tableElements))
+
+            function tableElements(element, index, arr) {
+                
+                if (element.id > i) {
+                    if (element.id < n) {                      
+                        arr[index] = document.querySelector('table').innerHTML +=
+                            `<tr>
+        <td>${element.userId}</td>
+        <td>${element.id}</td>
+        <td>${element.title}</td>
+        <td>${element.body}</td>
+         </tr>`
+         
+
+ 
+                    }
+                }
+             
+            }
+             i = i + 1;
+             n = n + 1;
+             if (n > 101) {
+                 alert("Посты закончились, перезагрузите страницу!")
+             }
+           
+        }
+        let table = document.querySelector('table');
+ //       table.rows[1].style.background = 'red';
+        
+        function youFunction() {
+            let Row = document.getElementById("somerow");
+            let Cells = Row.getElementsByTagName("td");
+            let titleContent = (Cells[2].innerText);
+//                alert(titleContent);
+            let texte = (document.querySelector("input[name='tx']").value);
+            console.log(texte);
+        
+            if (titleContent.includes(texte)){
+   //             table.rows[1].background.color = 'red';
+                titleContent.color = "red"
+                alert(titleContent)}
+        }
+        
+        
+          
+    </script>
+</body>
+
+</html>
